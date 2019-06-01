@@ -10,8 +10,6 @@ import com.experitest.appium.SeeTestClient;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.slf4j.Logger;
-import org.slf4j.impl.Log4jLoggerFactory;
 
 public class AndroidTest {
 
@@ -20,7 +18,7 @@ public class AndroidTest {
 	protected DesiredCapabilities dc = new DesiredCapabilities();
 	private SeeTestClient client;
     //private String accessKey = "eyJ4cC51Ijo2MzYyMDQxLCJ4cC5wIjo2MzYyMDQwLCJ4cC5tIjoiTVRVMU9ERTNOalEyTXpNNE5BIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NzM1MzY0NjQsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.I0lYQp0QK3EQPxosVQHZ3PyJRzdQLUxLdll8fQZ6Rwc";
-        Logger LOGGER = new Log4jLoggerFactory().getLogger(this.getClass().getName());
+      
 	
  
     @Before
@@ -34,7 +32,7 @@ public class AndroidTest {
 		dc.setCapability("build.number", System.getenv("BUILD_NUMBER"));
 		dc.setCapability("accessKey", "accessKey");
         	dc.setCapability(MobileCapabilityType.UDID, System.getenv("RESERVED_DEVICE"));
-        	LOGGER.info("Reserving device - "+ System.getenv("RESERVED_DEVICE"));
+        	
     		
 	        
         driver = new AndroidDriver<AndroidElement>(new URL(System.getenv("url")), dc);
