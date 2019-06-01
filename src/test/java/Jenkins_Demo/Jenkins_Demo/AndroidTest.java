@@ -4,6 +4,7 @@ import io.appium.java_client.android.AndroidElement;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import io.appium.java_client.remote.MobileCapabilityType;
 
 import com.experitest.appium.SeeTestClient;
 
@@ -17,7 +18,7 @@ public class AndroidTest {
 	protected DesiredCapabilities dc = new DesiredCapabilities();
 	private SeeTestClient client;
 	
-    private String accessKey = "eyJ4cC51Ijo2MzYyMDQxLCJ4cC5wIjo2MzYyMDQwLCJ4cC5tIjoiTVRVMU9ERTNOalEyTXpNNE5BIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NzM1MzY0NjQsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.I0lYQp0QK3EQPxosVQHZ3PyJRzdQLUxLdll8fQZ6Rwc";
+    //private String accessKey = "eyJ4cC51Ijo2MzYyMDQxLCJ4cC5wIjo2MzYyMDQwLCJ4cC5tIjoiTVRVMU9ERTNOalEyTXpNNE5BIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NzM1MzY0NjQsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.I0lYQp0QK3EQPxosVQHZ3PyJRzdQLUxLdll8fQZ6Rwc";
 
     @Before
     public void setUp() throws MalformedURLException {
@@ -27,7 +28,8 @@ public class AndroidTest {
 		dc.setCapability("reportFormat", "xml");
 		dc.setCapability("stream", "jenkins_android_phone");
 		dc.setCapability("build.number", System.getenv("BUILD_NUMBER"));
-		dc.setCapability("accessKey", accessKey); 
+		dc.setCapability("accessKey", "accessKey"); 
+	        dc.setCapability(MobileCapabilityType.UDID, "RESERVED_DEVICE");
         driver = new AndroidDriver<AndroidElement>(new URL(System.getenv("url")), dc);
         client = new SeeTestClient(driver);
     }
