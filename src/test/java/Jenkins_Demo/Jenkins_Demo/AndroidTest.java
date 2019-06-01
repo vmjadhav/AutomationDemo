@@ -17,19 +17,30 @@ public class AndroidTest {
 	protected AndroidDriver<AndroidElement> driver = null;
 	protected DesiredCapabilities dc = new DesiredCapabilities();
 	private SeeTestClient client;
-	
+	String os;
     //private String accessKey = "eyJ4cC51Ijo2MzYyMDQxLCJ4cC5wIjo2MzYyMDQwLCJ4cC5tIjoiTVRVMU9ERTNOalEyTXpNNE5BIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NzM1MzY0NjQsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.I0lYQp0QK3EQPxosVQHZ3PyJRzdQLUxLdll8fQZ6Rwc";
-
+    
+	
+    @Parameters("os") 
     @Before
-    public void setUp() throws MalformedURLException {
-        dc.setCapability("testName", testName);
+    public void setUp(@Optional("android") String os) throws MalformedURLException {
+	    this.os = os;
+        	dc.setCapability("testName", testName);
 		dc.setCapability("deviceQuery", System.getenv("deviceQuery"));
 		dc.setCapability("reportDirectory", "reports");
 		dc.setCapability("reportFormat", "xml");
 		dc.setCapability("stream", "jenkins_android_phone");
 		dc.setCapability("build.number", System.getenv("BUILD_NUMBER"));
 		dc.setCapability("accessKey", "accessKey"); 
-	        dc.setCapability(MobileCapabilityType.UDID, "RESERVED_DEVICE");
+	   	if ("android".equals(os)) {
+        		dc.setCapability(MobileCapabilityType.UDID, System.getenv("RESERVED_DEVICE"));
+        		LOGGER.info("Reserving device - "+ System.getenv("RESERVED_DEVICE"));
+    		} else {
+        		String query = String.format("@os='%s'", os);
+        		dc.setCapability(SeeTestCapabilityType.DEVICE_QUERY, query);
+        		LOGGER.info("Device Query = {}", query);
+    		}
+	        
         driver = new AndroidDriver<AndroidElement>(new URL(System.getenv("url")), dc);
         client = new SeeTestClient(driver);
     }
