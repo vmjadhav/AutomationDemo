@@ -25,7 +25,7 @@ public class AndroidTest {
     public void setUp() throws MalformedURLException {
 	   
         	dc.setCapability("testName", testName);
-		//dc.setCapability("deviceQuery", System.getenv("deviceQuery"));
+		dc.setCapability("deviceQuery", System.getenv("deviceQuery"));
 		dc.setCapability("reportDirectory", "reports");
 		dc.setCapability("reportFormat", "xml");
 		dc.setCapability("stream", "jenkins_android_phone");
