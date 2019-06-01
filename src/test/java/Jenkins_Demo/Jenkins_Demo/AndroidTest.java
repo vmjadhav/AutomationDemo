@@ -30,8 +30,8 @@ public class AndroidTest {
 		dc.setCapability("reportFormat", "xml");
 		dc.setCapability("stream", "jenkins_android_phone");
 		dc.setCapability("build.number", System.getenv("BUILD_NUMBER"));
-		dc.setCapability("accessKey", "accessKey");
-        	//dc.setCapability(MobileCapabilityType.UDID, System.getenv("RESERVED_DEVICE"));
+		dc.setCapability("accessKey", System.getenv("accessKey"));
+        	dc.setCapability(MobileCapabilityType.UDID, System.getenv("RESERVED_DEVICE"));
         	
     		
 	        
